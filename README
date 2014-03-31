@@ -1,0 +1,5 @@
+Manage the version of facter that is installed.
+
+Debian Xen guests are incorrectly detected as physical machines, when they use
+the 'main' version of facter. The version of facter in 'wheezy-backports' fixes
+this problem. 
