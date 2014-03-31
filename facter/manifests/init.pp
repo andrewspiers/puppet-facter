@@ -1,14 +1,25 @@
 class facter {
-  notify {'Test':
-    message => 'test message',
+  #notify {'Testfact':
+  #  message => "$operatingsystemrelease",
+  #}
+
+  #notify {'Testfact2':
+  #  message => "$operatingsystemmajorrelease",
+  #}
+
+  case $operatingsystem {
+     'Debian': {
+        #notify {'debianmessage':
+        #  message => "you are running Debian $operatingsystemmajorrelease"
+        #}
+        file {'/etc/apt/preferences.d/facter':
+          source => "puppet:///modules/facter/facter",
+          notify => Package ['facter'],
+        }
+    }
   }
 
-  notify {'Testfact':
-    message => "$operatingsystemrelease",
+  package {"facter":
+    ensure => latest,
   }
-
-  notify {'Testfact2':
-    message => "$operatingsystemmajorrelease",
-  }
-
 }
